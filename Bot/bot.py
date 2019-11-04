@@ -4,7 +4,7 @@ from telegram.ext import Updater
 from telegram.ext import MessageHandler
 from telegram.ext import Filters
 
-TG_TOKEN = "1031631815:AAH7Ahdqdnj6SCoCvM5dYw9i_yvny-rz-mk"
+TG_TOKEN = "TOKEN"
 
 def message_handler(bot: Bot, update: Update):
     file = open('log.txt', 'a')
