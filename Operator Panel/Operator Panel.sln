@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Operator Panel", "Operator Panel\Operator Panel.pyproj", "{679EF906-97BC-4203-9086-AE08E9438E7A}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Operator Panel", "Operator Panel\Operator Panel.pyproj", "{22200C96-C780-4AFD-AF5B-8131A56A3544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{679EF906-97BC-4203-9086-AE08E9438E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{679EF906-97BC-4203-9086-AE08E9438E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{679EF906-97BC-4203-9086-AE08E9438E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{679EF906-97BC-4203-9086-AE08E9438E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22200C96-C780-4AFD-AF5B-8131A56A3544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22200C96-C780-4AFD-AF5B-8131A56A3544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22200C96-C780-4AFD-AF5B-8131A56A3544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22200C96-C780-4AFD-AF5B-8131A56A3544}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D44A309A-1A86-475B-B369-AFD2E52FDBE4}
+		SolutionGuid = {CD23C7F1-D511-4ED8-A2CA-83559700202A}
 	EndGlobalSection
 EndGlobal
