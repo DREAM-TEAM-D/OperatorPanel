@@ -1,4 +1,0 @@
-Flask<1
-flask-sqlalchemy
-Flask-Migrate
-mysql-connector
