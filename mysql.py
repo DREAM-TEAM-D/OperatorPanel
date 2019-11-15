@@ -11,7 +11,7 @@ from pyfladesk import init_gui
 app = Flask(__name__)
 
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Mobqac6k_'
+app.config['MYSQL_PASSWORD'] = 'lelelelel'
 app.config['MYSQL_DB'] = 'db_operatorpanel'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['JWT_SECRET_KEY'] = 'secret'
