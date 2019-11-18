@@ -10,7 +10,7 @@ from pyfladesk import init_gui
 app = Flask(__name__)
 
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'lelelelel'
+app.config['MYSQL_PASSWORD'] = 'your_pass'
 app.config['MYSQL_DB'] = 'db_operatorpanel'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['JWT_SECRET_KEY'] = 'secret'
@@ -20,6 +20,32 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
 CORS(app)
+
+@app.route('/register', methods=['POST'])
+def register():
+    cur = mysql.connection.cursor()
+    first_name = request.get_json()['first_name']
+    last_name = request.get_json()['last_name']
+    email = request.get_json()['email']
+    password = bcrypt.generate_password_hash(
+        request.get_json()['password']).decode('utf-8')
+    created = datetime.utcnow()
+
+    cur.execute(
+        "INSERT INTO op_users (first_name, last_name, email, password, created) VALUES ('"
+        + str(first_name) + "','" + str(last_name) + "','" + str(email) +
+        "','" + str(password) + "','" + str(created) + "')")
+    mysql.connection.commit()
+
+    result = {
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'password': password,
+        'created': created
+    }
+
+    return jsonify({'result': result})
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -38,9 +64,9 @@ def login():
                 'last_name': rv['last_name'],
                 'email': rv['email']
             })
-        result = access_token
+        result = access_token, 201
     else:
-        result = jsonify({"error": "Invalid username and password"})
+        result = jsonify({"error": "Invalid username and password"}), 401
 
     return result
 
