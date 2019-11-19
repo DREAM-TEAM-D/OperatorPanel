@@ -4,12 +4,14 @@ import axios from 'axios';
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from '../store/index';
 import vuetify from './plugins/vuetify';
 
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
+
+axios.defaults.baseURL = 'http://localhost:5000';
 
 Vue.use(BootstrapVue);
 

@@ -1,27 +1,9 @@
-from flask import Flask, jsonify, request, json, render_template
-from flask_mysqldb import MySQL
-from datetime import datetime
-from flask_cors import CORS
-from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token
-from pyfladesk import init_gui
+from flask import request, jsonify
+from app import app, mysql, bcrypt, jwt 
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 
 
-app = Flask(__name__)
-
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'your_pass'
-app.config['MYSQL_DB'] = 'db_operatorpanel'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['JWT_SECRET_KEY'] = 'secret'
-
-mysql = MySQL(app)
-bcrypt = Bcrypt(app)
-jwt = JWTManager(app)
-
-CORS(app)
-
-@app.route('/register', methods=['POST'])
+@app.route('/users/register', methods=['POST'])
 def register():
     cur = mysql.connection.cursor()
     first_name = request.get_json()['first_name']
@@ -52,7 +34,11 @@ def login():
     cur = mysql.connection.cursor()
     email = request.get_json()['email']
     password = request.get_json()['password']
-    result = ""
+
+    if not email:
+        return jsonify({"msg": "Missing email parameter"}), 400
+    if not password:
+        return jsonify({"msg": "Missing password parameter"}), 400
 
     cur.execute("SELECT * FROM op_users where email = '" + str(email) + "'")
     rv = cur.fetchone()
@@ -64,11 +50,19 @@ def login():
                 'last_name': rv['last_name'],
                 'email': rv['email']
             })
-        result = access_token, 201
+        return jsonify({'success': True, 'token': access_token}), 200
     else:
-        result = jsonify({"error": "Invalid username and password"}), 401
+        return jsonify({'success': False, 'message': 'Bad email or password'}), 401
 
-    return result
 
-if __name__ == "__main__": 
-	app.run()
+@app.route('/verify-token', methods=['POST'])
+@jwt_required
+def verify_token():
+    return jsonify({'success': True}), 200
+
+
+@app.route('/protected', methods=['GET'])
+@jwt_required
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
